@@ -1,3 +1,3 @@
 """
-This will be the mian python file
+This will be the main python file
 """
