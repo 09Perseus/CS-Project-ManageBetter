@@ -1,4 +1,4 @@
-# CS-Project-AI-Chatbot
+# CS-Project-ManageBetter
 AI Chatbot by Balaji, Dinith, Rui
 
 ##Specification
