@@ -19,7 +19,8 @@ Within each class, there is a message section as well as ability for teachers to
 
 ###Models 
 Models will be created in the admin app 
-Students ( studentid, full name, grade, DOB)
-Teachers ( teacherid, full name)
+Students ( studentid, fname, grade, DOB)
+Teachers ( teacherid, fname)
 Classes (classid, name, grade, fkey - teachers, mtom - students)
-Assignments (fkey - classes)
+Assignments (assignmentid, name, fkey - classes)
+Submissions (fkey - assignments, fkey - studentid, submission)
