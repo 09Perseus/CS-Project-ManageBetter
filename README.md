@@ -22,5 +22,5 @@ Models will be created in the admin app
 Students ( studentid, fname, grade, DOB)
 Teachers ( teacherid, fname)
 Classes (classid, name, grade, fkey - teachers, mtom - students)
-Assignments (assignmentid, name, fkey - classes)
+Assignments (assignmentid, name, score, fkey - classes)
 Submissions (fkey - assignments, fkey - studentid, submission)
