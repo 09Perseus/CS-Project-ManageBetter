@@ -3,24 +3,27 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 #Schools Table
+class User(User):
+    pass
+
 class Schools(models.Model):
-    schoolid = models.IntegerField(null = False, Default = 1)
+    schoolid = models.IntegerField(null = False, default = 1)
     schoolname = models.CharField(max_length=1000, default = '-')
 
 #Admin Table
 class Admin(models.Model):
-    user = models.OnetoOneField('User', related_name='admins')
+    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='admins')
     schoolid = models.ForeignKey(Schools, on_delete=models.CASCADE, related_name = "school_admin")
 
 #Students Table
 class Student(models.Model):
-    user = models.OneToOneField('User', related_name='students')
-    grade = models.IntegerField(null = False, Default =1 )
+    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name='students')
+    grade = models.IntegerField(null = False, default =1 )
     schoolid = models.ForeignKey(Schools, on_delete=models.CASCADE, related_name = "school_students")
 
 #Teachers Table
 class Teacher(models.Model):
-    user = models.OneToOneField('User', related_name = 'teachers')
+    user = models.OneToOneField('User', on_delete=models.CASCADE, related_name = 'teachers')
     schoolid = models.ForeignKey(Schools, on_delete=models.CASCADE, related_name = "school_teachers")
 
 #Classes Table
