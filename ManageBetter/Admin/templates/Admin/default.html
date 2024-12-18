@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<!--Div containing the links that take each user to their login-->
-<div style="text-align: right;">
-Student Login | Teacher Login | Admin Login
-</div>
+{% extends "Admin/layout.html" %}
 
-<!--Div containing the main text on the webpage-->
-<div>
-<h1>Hello!</h1>
-<h3>Welcome to the ManageBetter Website, an online gradebook for your school.</h3>
-</div>
+{% block head %}
+    <title>Homepage</title>
+{% endblock %}
+
+{% block body %}
+    <!--Div containing the links that take each user to their login-->
+    <div style="text-align: right;">
+        <a>Student Login</a> | <a>Teacher Login</a> | <a href="{% url 'adminlogin' %}">Admin Login</a>
+    </div>
+
+    <!--Div containing the main text on the webpage-->
+    <div>
+        <h2>Hello!</h2>
+        <h3>Welcome to the ManageBetter Website, an online gradebook for your school.</h3>
+    </div>
+{% endblock %}
 
 
-</html>
