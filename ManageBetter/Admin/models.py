@@ -4,7 +4,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 #Schools Table
 class User(User):
-    pass
+    rolechoices = (
+        ("student", "Student"),
+        ("teacher", "Teacher"),
+        ("school_admin", "School Admin"),
+    )
+    role = models.CharField(max_length=20, choices=rolechoices, default="student")
 
 class Schools(models.Model):
     schoolid = models.IntegerField(null = False, default = 1)

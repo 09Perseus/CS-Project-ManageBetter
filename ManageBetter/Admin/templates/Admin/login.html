@@ -1,13 +1,13 @@
 {% extends "Admin/layout.html" %}
 
 {% block head %}
-    <title>Admin Login</title>
+    <title>Login</title>
 {% endblock %}
 
 {% block body %}
     <form action="{% url 'adminlogin' %}" method="post">
         {% csrf_token %}
-        {{ adminloginform }}
+        {{ loginform }}
         <input type="submit" value="Login">
     </form>
 
