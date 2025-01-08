@@ -12,22 +12,20 @@ from .models import User, Schools, Admin, Student, Teacher, Classes, Grades
 
 #This view will load the default webpage of the application
 def default(request):
-    """
+    
     if request.user.is_authenticated == False:
         return userlogin(request)
     else:
-        fname = request.user.first_name
-        lname = request.user.last_name
+        if request.user.role == "School Admin":
+            fname = request.user.first_name
+            lname = request.user.last_name
 
-        return render(request, "Admin/adminhomepage.html", {
-            "fname":fname,
-            "lname":lname
-        })
-    """
-    #Return login page
-    return render(request, "Admin/login.html", {
-        "adminloginform": adminloginform()
-    })
+            return render(request, "Admin/adminhomepage.html", {
+                "fname":fname,
+                "lname":lname
+            })
+    
+    
 
 #Creating form for admin to login
 class adminloginform(forms.Form):
