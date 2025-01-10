@@ -23,27 +23,18 @@ def default(request):
     else:
         fname = request.user.first_name
         lname = request.user.last_name
-        if request.user.role == "School Admin":
+        if request.user.role == "school_admin":
             details = Admin.objects.get(user=request.user)
             return render(request, "SAdmin/adminhomepage.html", {
                 "fname":fname,
                 "lname":lname,
-                "school":details.schoolid.schoolname
+                "school":details.schoolid.schoolname,
+                "role":"School Admin"
             })
-        elif request.user.role == "Teacher":
-            details = Admin.objects.get(user=request.user)
-            return render(request, "SAdmin/adminhomepage.html", {
-                "fname":fname,
-                "lname":lname,
-                "school":details.schoolid.schoolname
-            })
+        elif request.user.role == "teacher":
+            pass
         else:
-            details = Admin.objects.get(user=request.user)
-            return render(request, "SAdmin/adminhomepage.html", {
-                "fname":fname,
-                "lname":lname,
-                "school":details.schoolid.schoolname
-            })
+            pass
 
 #This view will load the login page if the request method is GET. Else it will log the user in and redirect them to their homepage
 def userlogin(request):
@@ -66,12 +57,12 @@ def userlogin(request):
             })
         else:
             login(request, user)
-            if user.role == "School Admin":
+            if user.role == "school_admin":
                 return HttpResponseRedirect(reverse("default"))
-            elif user.role == "Teacher":
-                return HttpResponseRedirect(reverse("default"))
+            elif user.role == "teacher":
+                pass
             else:
-                return HttpResponseRedirect(reverse("default"))
+                pass
             
 
 def userlogout(request):
