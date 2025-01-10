@@ -1,4 +1,4 @@
-{% extends "Admin/layout.html" %}
+{% extends "SAdmin/layout.html" %}
 
 {% block head %}
     <title>Admin Homepage</title>
@@ -6,6 +6,7 @@
 
 {% block body %}
     <div style="text-align: right;">
+        {{school}}<br> 
         <a href="{% url 'logout' %}">Logout</a>
     </div>
     <h1>Welcome {{fname}} {{lname}}<h1>

@@ -1,11 +1,11 @@
-{% extends "Admin/layout.html" %}
+{% extends "SAdmin/layout.html" %}
 
 {% block head %}
     <title>Login</title>
 {% endblock %}
 
 {% block body %}
-    <form action="{% url 'adminlogin' %}" method="post">
+    <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         {{ loginform }}
         <input type="submit" value="Login">

@@ -10,35 +10,47 @@ from .models import User, Schools, Admin, Student, Teacher, Classes, Grades
 
 # Create your views here.
 
-#This view will load the default webpage of the application
-def default(request):
-    
-    if request.user.is_authenticated == False:
-        return userlogin(request)
-    else:
-        if request.user.role == "School Admin":
-            fname = request.user.first_name
-            lname = request.user.last_name
-
-            return render(request, "Admin/adminhomepage.html", {
-                "fname":fname,
-                "lname":lname
-            })
-    
-    
-
 #Creating form for admin to login
-class adminloginform(forms.Form):
+class loginform(forms.Form):
     username = forms.CharField(label="Username")
     password = forms.CharField(widget=forms.PasswordInput())
 
+#This view will load the default webpage of the application
+def default(request):
+   
+    if not request.user.is_authenticated:
+        return userlogin(request)
+    else:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        if request.user.role == "School Admin":
+            details = Admin.objects.get(user=request.user)
+            return render(request, "SAdmin/adminhomepage.html", {
+                "fname":fname,
+                "lname":lname,
+                "school":details.schoolid.schoolname
+            })
+        elif request.user.role == "Teacher":
+            details = Admin.objects.get(user=request.user)
+            return render(request, "SAdmin/adminhomepage.html", {
+                "fname":fname,
+                "lname":lname,
+                "school":details.schoolid.schoolname
+            })
+        else:
+            details = Admin.objects.get(user=request.user)
+            return render(request, "SAdmin/adminhomepage.html", {
+                "fname":fname,
+                "lname":lname,
+                "school":details.schoolid.schoolname
+            })
 
 #This view will load the login page if the request method is GET. Else it will log the user in and redirect them to their homepage
 def userlogin(request):
     if request.method != "POST":
         #Return login page
-        return render(request, "Admin/login.html", {
-            "adminloginform": adminloginform()
+        return render(request, "SAdmin/login.html", {
+            "loginform": loginform()
         })
     else:
         #Get username and password from the form
@@ -48,8 +60,8 @@ def userlogin(request):
         user = authenticate(request, username=username, password=password)
 
         if user is None:
-            return render(request, "Admin/login.html", {
-            "adminloginform": adminloginform(),
+            return render(request, "SAdmin/login.html", {
+            "loginform": loginform(),
             "message": 'Invalid Username or Password'
             })
         else:
@@ -57,9 +69,10 @@ def userlogin(request):
             if user.role == "School Admin":
                 return HttpResponseRedirect(reverse("default"))
             elif user.role == "Teacher":
-                pass
-            elif user.role == "Student":
-                pass
+                return HttpResponseRedirect(reverse("default"))
+            else:
+                return HttpResponseRedirect(reverse("default"))
+            
 
 def userlogout(request):
     logout(request)
