@@ -68,3 +68,12 @@ def userlogin(request):
 def userlogout(request):
     logout(request)
     return HttpResponseRedirect(reverse("default"))
+
+def manageteachers(request):
+    userdetails = Admin.objects.get(user = request.user)
+    school = userdetails.schoolid
+    teachers = Teacher.objects.filter(schoolid = school)
+
+    return render(request, "SAdmin/manageteachers.html", {
+        "teachers":teachers
+    })
