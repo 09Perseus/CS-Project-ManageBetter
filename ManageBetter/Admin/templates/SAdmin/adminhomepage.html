@@ -1,25 +1,5 @@
 {% extends "SAdmin/layout.html" %}
 
-{% block head %}
-    <title>Admin Homepage</title>
-{% endblock %}
-
 {% block body %}
-    <div style="text-align: right;">
-        {{role}}<br>
-        {{school}}<br> 
-        <a href="{% url 'logout' %}">Logout</a>
-    </div>
 
-    <div>
-        <h1>Welcome {{fname}} {{lname}}</h1>
-
-        <h3>
-        <a href="{% url 'manageteachers' %}">Manage Teachers</a><br>
-        <a>Manage Students</a><br>
-        <a>User Settings</a><br>
-        </h3>
-    </div>
 {% endblock %}
-
-

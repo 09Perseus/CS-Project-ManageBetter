@@ -9,6 +9,8 @@ from .models import User, Schools, Admin, Student, Teacher, Classes, Grades
 
 
 # Create your views here.
+def index(request): 
+    return render(request, 'SAdmin/adminhomepage.html')
 
 #Creating form for admin to login
 class loginform(forms.Form):
