@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User, Todo
+from .models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db import IntegrityError
